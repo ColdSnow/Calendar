@@ -1,0 +1,20 @@
+<view class="mood-picker-mask {{show ? 'show' : ''}}" bindtap="onClose">
+  <view class="mood-picker-content" catchtap="preventDefault">
+    <view class="mood-picker-header">
+      <text>选择心情</text>
+      <view class="close-btn" bindtap="onClose">×</view>
+    </view>
+    <view class="mood-grid">
+      <view 
+        class="mood-item" 
+        wx:for="{{moods}}" 
+        wx:key="value"
+        data-mood="{{item}}"
+        bindtap="onMoodSelect"
+      >
+        <view class="mood-emoji">{{item.emoji}}</view>
+        <view class="mood-name">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

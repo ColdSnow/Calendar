@@ -1,0 +1,53 @@
+<view class="detail-container">
+  <!-- 简化后的日期选择器 -->
+  <picker 
+    mode="date" 
+    value="{{currentDate}}" 
+    start="1900-01-01" 
+    end="2100-12-31" 
+    bindchange="onDateChange"
+  >
+    <view class="date-header" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
+      <text class="solar-date {{isPickerTouched ? 'active' : ''}}">{{solarDate}}</text>
+    </view>
+  </picker>
+
+  <!-- 日期信息区域 -->
+  <view class="date-info">
+    <view class="lunar-info">
+      <text>农历 {{lunarDate}}</text>
+      <text wx:if="{{festival}}" class="festival">{{festival}}</text>
+    </view>
+    <view class="almanac-info">
+      <text>{{almanac.suitable}}</text>
+      <text>{{almanac.avoid}}</text>
+    </view>
+  </view>
+
+  <!-- 心情和备忘录区域 -->
+  <view class="mood-memo-section">
+    <view class="section-title">今日心情</view>
+    <view class="mood-picker">
+      <view 
+        wx:for="{{moodList}}" 
+        wx:key="value" 
+        class="mood-item {{currentMood === item.value ? 'selected' : ''}}"
+        bindtap="selectMood"
+        data-mood="{{item.value}}"
+      >
+        <text class="mood-icon">{{item.icon}}</text>
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="section-title">备忘录</view>
+    <textarea 
+      class="memo-input"
+      value="{{memo}}"
+      placeholder="记录一下今天的想法..."
+      bindinput="onMemoInput"
+    ></textarea>
+
+    <button class="save-btn" bindtap="saveMoodAndMemo">保存</button>
+  </view>
+</view>

@@ -1,0 +1,520 @@
+/* 页面容器 */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+/* 用户信息样式 */
+.user-info {
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.user-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 插画区域 */
+.illustration-area {
+  width: 100%;
+  padding: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration {
+  width: 600rpx;
+  height: 400rpx;
+  object-fit: contain;
+}
+
+/* 日历容器 */
+.calendar-container {
+  flex-shrink: 0;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 30rpx 30rpx 0 0;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+  padding-top: 20rpx;
+}
+
+/* 年月选择器 */
+.date-picker {
+  text-align: center;
+  padding: 20rpx;
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.picker-arrow {
+  font-size: 24rpx;
+  margin-left: 10rpx;
+  color: #666;
+}
+
+/* 星期表头 */
+.weekday-header {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.weekday-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+/* 日历主体 */
+.calendar-body {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 日期格子样式 */
+.date-item {
+  position: relative;
+  width: calc(100% / 7);
+  height: 140rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rpx;
+  box-sizing: border-box;
+}
+
+.date-number {
+  font-size: 32rpx;
+  line-height: 1.2;
+  margin-bottom: 4rpx;
+}
+
+.lunar-info {
+  font-size: 20rpx;
+  color: #666;
+  line-height: 1.2;
+  text-align: center;
+  height: 24rpx;
+}
+
+.mood-mark {
+  position: absolute;
+  bottom: 8rpx;
+  right: 8rpx;
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+.today {
+  background-color: rgba(7, 193, 96, 0.15);
+}
+
+.other-month {
+  opacity: 0.3;
+}
+
+/* 心情选择器样式 */
+.mood-picker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.mood-picker-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mood-picker-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mood-picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30rpx 30rpx 20rpx;
+}
+
+.selected-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10rpx 0;
+}
+
+.solar-date {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+}
+
+.lunar-text {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 4rpx;
+}
+
+.divider {
+  height: 1rpx;
+  background: #eee;
+  margin: 0 30rpx;
+}
+
+.close-btn {
+  font-size: 40rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+.mood-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20rpx;
+  padding: 20rpx;
+}
+
+.mood-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx;
+  border-radius: 12rpx;
+}
+
+.mood-item.selected {
+  background-color: rgba(7, 193, 96, 0.1);
+  border: 2rpx solid #07c160;
+}
+
+.mood-icon {
+  font-size: 40rpx;
+  margin-bottom: 8rpx;
+}
+
+.mood-label {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.memo-section {
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  margin-top: 20rpx;
+}
+
+.memo-header {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.memo-input {
+  background: #fff;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.memo-input textarea {
+  width: 100%;
+  min-height: 200rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.memo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.memo-tip {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.bottom-buttons {
+  padding: 30rpx;
+  border-top: 1rpx solid #eee;
+  margin-top: 20rpx;
+}
+
+.save-btn {
+  width: 100% !important;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  display: flex;           
+  align-items: center;
+  justify-content: center;
+  border-radius: 40rpx;
+  background: #07c160;
+  color: #fff;
+  margin: 0;
+}
+
+/* 日期导航样式 */
+.date-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 20rpx;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  color: #07c160;
+  font-size: 28rpx;
+  border-radius: 30rpx;
+  background: #f0f8f4;
+}
+
+.nav-btn:active {
+  opacity: 0.8;
+}
+
+.nav-icon {
+  font-size: 24rpx;
+  margin: 0 6rpx;
+}
+
+.current-date {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 确保其他现有的弹窗样式保持不变 */
+.memo-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.memo-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 85vh;
+  background: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.memo-content.show {
+  transform: translateY(0);
+}
+
+.memo-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.date-text {
+  font-size: 34rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.lunar-text {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.close-btn {
+  font-size: 44rpx;
+  color: #999;
+  padding: 10rpx;
+  height: 44rpx;
+  width: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+}
+
+.mood-list {
+  padding: 20rpx 0;
+  flex-shrink: 0;
+}
+
+.memo-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  position: relative;
+  margin: 20rpx 0;
+}
+
+.memo-scroll {
+  flex: 1;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  height: 500rpx;
+}
+
+.memo-input {
+  width: 100%;
+  height: 100%;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+}
+
+.memo-count {
+  position: absolute;
+  bottom: 30rpx;
+  right: 40rpx;
+  font-size: 24rpx;
+  color: #999;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4rpx 8rpx;
+}
+
+.button-group {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+}
+
+.cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.confirm {
+  background: #07c160;
+  color: #fff;
+}
+
+.memo-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 999;
+  transition: background-color 0.3s ease-out;
+  pointer-events: none;
+}
+
+.memo-mask.show-mask {
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+.memo-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 85vh;
+  background: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 20rpx 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.user-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.illustration-area {
+  padding: 20rpx 0;
+}
