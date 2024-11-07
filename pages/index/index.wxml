@@ -1,0 +1,107 @@
+<view class="page-container">
+  <!-- 用户信息区域 -->
+  <view class="header">
+    <view class="user-info" wx:if="{{userInfo}}">
+      <image class="user-avatar" src="{{userInfo.avatarUrl || '../../images/default-avatar.png'}}" mode="aspectFill"></image>
+      <text class="user-name">{{userInfo.nickName || '微信用户'}}</text>
+    </view>
+  </view>
+
+  <!-- 插画区域 -->
+  <view class="illustration-area">
+    <image class="illustration" src="../../images/illustration.png" mode="aspectFit"></image>
+  </view>
+
+  <!-- 日历容器 -->
+  <view class="calendar-container">
+    <!-- 年月选择器 -->
+    <picker mode="date" fields="month" value="{{year}}-{{month}}" start="2024-01" end="2026-12" bindchange="onDatePickerChange">
+      <view class="date-picker">
+        {{year}}年{{month}}月
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+
+    <!-- 星期表头 -->
+    <view class="weekday-header">
+      <view class="weekday-item weekend">日</view>
+      <view class="weekday-item">一</view>
+      <view class="weekday-item">二</view>
+      <view class="weekday-item">三</view>
+      <view class="weekday-item">四</view>
+      <view class="weekday-item">五</view>
+      <view class="weekday-item weekend">六</view>
+    </view>
+
+    <!-- 日历主体 -->
+    <view class="calendar-body">
+      <block wx:for="{{dateList}}" wx:key="dateKey">
+        <view class="date-item {{item.isCurrentMonth ? '' : 'other-month'}} {{item.isToday ? 'today' : ''}} {{item.isWeekend ? 'weekend' : ''}}"
+              bindtap="onDayClick"
+              data-year="{{item.year}}"
+              data-month="{{item.month}}"
+              data-date="{{item.date}}">
+          <!-- 公历日期 -->
+          <view class="date-number">{{item.date}}</view>
+          
+          <!-- 农历或节日 -->
+          <view class="lunar-info">
+            {{holidays[item.dateKey] || lunarDates[item.dateKey]}}
+          </view>
+          
+          <!-- 心情图标 -->
+          <view class="mood-icon" wx:if="{{item.moodIcon}}">{{item.moodIcon}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<!-- 遮罩层 -->
+<view class="memo-mask {{showMoodPicker ? 'show-mask' : ''}}" bindtap="onCloseMoodPicker"></view>
+
+<!-- memo弹窗 -->
+<view class="memo-content {{showMoodPicker ? 'show' : ''}}">
+  <!-- 日期显示区域 -->
+  <view class="memo-header">
+    <view class="header-left">
+      <text class="date-text">{{selectedDate.year}}年{{selectedDate.month}}月{{selectedDate.date}}日</text>
+      <text class="lunar-text">{{lunarDates[selectedDateKey]}}{{holidays[selectedDateKey] ? ' ' + holidays[selectedDateKey] : ''}}</text>
+    </view>
+    <text class="close-btn" bindtap="onCloseMoodPicker">×</text>
+  </view>
+
+  <!-- 心情选择区域 -->
+  <view class="mood-list">
+    <view wx:for="{{moods}}" 
+          wx:key="value"
+          class="mood-item {{selectedMood === item.value ? 'selected' : ''}}"
+          bindtap="onMoodSelect"
+          data-mood="{{item.value}}">
+      <text>{{item.icon}}</text>
+      <text>{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 备注区域 -->
+  <view class="memo-area">
+    <scroll-view scroll-y class="memo-scroll">
+      <textarea 
+        class="memo-input"
+        value="{{currentMemo}}"
+        placeholder="记录此刻的想法..."
+        bindinput="onMemoInput"
+        maxlength="500"
+        show-confirm-bar="{{false}}"
+      ></textarea>
+    </scroll-view>
+    <view class="memo-count">{{currentMemo.length || 0}}/500</view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-buttons">
+    <button class="save-btn" bindtap="onSaveAll">保存</button>
+  </view>
+</view>
+
+<!-- 遮罩层 -->
+<view class="memo-mask" wx:if="{{showMoodPicker}}" bindtap="onCloseMoodPicker"></view>

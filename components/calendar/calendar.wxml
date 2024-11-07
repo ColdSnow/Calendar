@@ -1,0 +1,20 @@
+<view class="calendar">
+  <view class="calendar-header">
+    <view class="week-day" wx:for="{{weeks}}" wx:key="*this">{{item}}</view>
+  </view>
+  
+  <view class="calendar-body">
+    <view 
+      class="day {{item.isCurrentMonth ? 'current-month' : 'other-month'}} {{item.hasRecord ? 'has-record' : ''}}"
+      wx:for="{{days}}" 
+      wx:key="index"
+      data-date="{{item.date}}"
+      data-month="{{item.month}}"
+      data-year="{{item.year}}"
+      bindtap="onDayClick"
+    >
+      <view class="date-number">{{item.date}}</view>
+      <view class="mood-icon" wx:if="{{item.mood}}">{{item.mood}}</view>
+    </view>
+  </view>
+</view>

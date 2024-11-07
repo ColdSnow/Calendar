@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+      "mood-picker": "/components/mood-picker/mood-picker",
+      "memo-editor": "/components/memo-editor/memo-editor"
+    }
+  }

@@ -1,0 +1,27 @@
+<view class="memo-editor-mask {{show ? 'show' : ''}}" bindtap="onClose">
+  <view class="memo-editor-content" catchtap="preventDefault">
+    <view class="memo-editor-header">
+      <view class="date-mood">
+        <text>{{date.month}}月{{date.date}}日</text>
+        <text class="mood-emoji">{{mood.emoji}}</text>
+      </view>
+      <view class="close-btn" bindtap="onClose">×</view>
+    </view>
+
+    <view class="memo-input-area">
+      <textarea 
+        class="memo-textarea" 
+        placeholder="记录今天的心情..." 
+        value="{{text}}"
+        bindinput="onInput"
+        maxlength="200"
+        show-confirm-bar="{{false}}"
+      ></textarea>
+      <view class="word-count">{{text.length}}/200</view>
+    </view>
+
+    <view class="memo-footer">
+      <button class="save-btn" bindtap="onSave">保存</button>
+    </view>
+  </view>
+</view>

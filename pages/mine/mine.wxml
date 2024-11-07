@@ -1,0 +1,16 @@
+<view class="page-container">
+  <!-- 用户信息区域 -->
+  <view class="user-info">
+    <image 
+      class="user-avatar" 
+      src="{{userInfo.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}" 
+      mode="aspectFill"
+    ></image>
+    <text class="user-name">{{userInfo.nickName || '微信用户'}}</text>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="button-area" wx:if="{{hasUserInfo}}">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+</view>
